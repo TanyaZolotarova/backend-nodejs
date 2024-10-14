@@ -40,7 +40,8 @@ const server = http.createServer((req, res) => {
             }
 
             const items = readDataFromFile();
-            const newItem = { id: items.length + 1, name };
+            const newId = items.length > 0 ? Math.max(...items.map(i => i.id)) + 1 : 1;
+            const newItem = { id: newId, name };
             items.push(newItem);
             writeDataToFile(items);
 
